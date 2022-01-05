@@ -1,58 +1,51 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include"list.h"
 
-struct node{
-	int data;
-	struct node* next;
-	struct node* prev;
-};
-
-void insert(struct node** head){
-	
-	int d;
-	printf("Enter the data");
-	scanf("%d",&d);
-	struct node* new = (struct node*) malloc(sizeof(struct node));
-	if(!new)
-		printf("\n Overflow");
-	if((*head) == NULL){
-		new ->data =d;
-		new ->next = NULL;
-		new ->prev = NULL;
-		(*head) = new;
-	}
-	else{
-		new ->data = d;
-		new ->prev = NULL;
-		(*head) ->prev = new;
-		new ->next = (*head);
-		(*head) = new;
-	}
-}
-
-void traverse(struct node* head){
-
-	struct node* last;
-	struct node* t;
-	while(head != NULL){
-		printf("%d ",head->data);
-		last = head;
-		head = head ->next;
-	}
-	printf("\n In Reverse Order");
-	while(last != NULL){
-		printf("%d ",last->data);
-		last = last ->prev;
-	}
-}
 
 
 
 int main(){
 
-	struct node* head = NULL;
-	insert(&head);
-	insert(&head);
-	traverse(head);
+	struct node* head;
+
+	int choice;
+	do{
+		printf("----------MENU---------");
+		printf("\n 1. Initialize List \n 2. Insert at beginning \n3. Insert at perticular Positon\n 4. Insert at End \n 5. search");
+
+		printf("\n 6.Traverse\n 7.Remove");
+		printf("\n Enter 0 to exit Menu...");
+		printf("\n\n\n");
+		scanf("%d",&choice);
+		printf("\n\n");
+		switch(choice){
+			case 1:
+				init_List(&head);
+				break;
+			case 2:
+				insert(&head);
+				break;
+			case 3:
+				insert_At_Position(&head);
+				break;
+			case 4:
+				append(&head);
+				break;
+			case 5:
+				search(head);
+				break;
+			case 6:
+				traverse(head);
+				break;
+			case 7:
+				remove_Last(&head);
+			default:
+				if(choice == 0){
+					break;}
+				printf("\nInvalid option");
+			}
+	}while(choice != 0);
+
 	return 0;
 }	
